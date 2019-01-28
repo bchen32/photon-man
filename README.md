@@ -1,5 +1,5 @@
 # PhotonMan
-Joey Ilagan, Arik Baron, Ben Chen, Ben Guan
+Arik Baron, Ben Chen, Cameron Egbert, Ben Guan, Joey Ilagan
 
 OVERVIEW
 Photon Man is a hack and slash infinite runner. Players run as the titular Photon Man, a soldier wearing a Photon Suit with interchangeable abilities.
