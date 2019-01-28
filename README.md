@@ -1,4 +1,4 @@
-# PhotonManPHOTON MAN
+# PhotonMan
 Joey Ilagan, Arik Baron, Ben Chen, Ben Guan
 
 OVERVIEW
