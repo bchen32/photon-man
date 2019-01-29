@@ -24,14 +24,17 @@ public class attack extends object{
 		// sets damage to character's attack stat
 	}
 	
+	@Override
 	public void draw(Graphics g) {
-		if(Char.id)
-			if(x >= end)
+		if(Char.id) {
+			if(x >= end) {
 				visible = false;
-		else
-			if(x <= end)
+			}
+		}else {
+			if(x <= end) {
 				visible = false;
-				
+			}
+		}
 		super.draw(g);
 		// draws self
 	

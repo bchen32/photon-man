@@ -14,8 +14,10 @@ public class object {
 	int dx; int dy;
 	// movement speed
 	boolean visible;
+
 	
 	public object(sprites sp, int x, int y, int w, int h) {
+		
 		this.sp = sp;
 		this.x = x; this.y = y;
 		this.w = w;
@@ -31,12 +33,23 @@ public class object {
 		// draws self
 	}
 	public void move() {
-		x += dx; y += dy;
+			x += dx; 
+			y += dy;
 		// moves self according to movement speed
 	}
+	
 	
 	public Rectangle getHitBox() {
 		return new Rectangle(x, y, w, h);
 		// returns rectangle according to location and dimensions
 	}
+	
+	public boolean xUp() {
+		return true;
+	}
+	
+	private boolean xDown() {
+		return true;
+	}
+
 }

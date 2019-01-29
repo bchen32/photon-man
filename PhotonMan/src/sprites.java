@@ -8,7 +8,13 @@ public class sprites {
 	BufferedImage[] red = new BufferedImage[5];
 	BufferedImage[] blue = new BufferedImage[5];
 	BufferedImage[] green = new BufferedImage[5];
-	BufferedImage[] gray = new BufferedImage[5];
+	BufferedImage[] purple = new BufferedImage[5];
+	BufferedImage[] orange = new BufferedImage[5];
+	BufferedImage[] black = new BufferedImage[5];
+	BufferedImage[] scientist = new BufferedImage[5];
+	BufferedImage[] soldier = new BufferedImage[5];
+	
+	
 	// 0 bullet 1 slice 2 beam 3 yellow orb 4 purple orb
 	BufferedImage[] smallobj = new BufferedImage[5];
 	// 0 red 1 blue 2 green 3 purple 4 orange
@@ -29,9 +35,13 @@ public class sprites {
 			red[x] = img.getSubimage(40*x, 0, 40, 40);
 			blue[x] = img.getSubimage(40*x, 40, 40, 40);
 			green[x] = img.getSubimage(40*x, 80, 40, 40);
-			gray[x] = img.getSubimage(40*x, 120, 40, 40);
-			smallobj[x] = img.getSubimage(20*x, 160, 20, 20);
-			icons[x] = img.getSubimage(20*x, 180, 20, 20);
+			purple[x] = img.getSubimage(40*x, 120, 40, 40);
+			orange[x] = img.getSubimage(40*x, 160, 40, 40);
+			black[x] = img.getSubimage(40*x, 200, 40, 40);
+			scientist[x] = img.getSubimage(40*x, 240, 40, 40);
+			soldier[x] = img.getSubimage(40*x, 280, 40, 40);
+			smallobj[x] = img.getSubimage(20*x, 320, 20, 20);
+			icons[x] = img.getSubimage(20*x, 340, 20, 20);
 		}
 		largeobj[0] = img.getSubimage(100, 160, 40, 40);
 		largeobj[1] = img.getSubimage(140, 160, 40, 40);

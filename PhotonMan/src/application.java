@@ -1,5 +1,6 @@
-import java.awt.*;
-import javax.swing.*;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
 public class application extends JFrame{
 	
 	private static final long serialVersionUID = -6596113243078458151L;
@@ -19,6 +20,7 @@ public class application extends JFrame{
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				application ex = new application();
 	            ex.setVisible(true);
