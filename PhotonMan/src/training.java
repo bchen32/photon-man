@@ -13,7 +13,7 @@ public class training {
 		player = new character(sp, 20, 200, true);
 		atkCount = 0;
 		// creates new player at 20, 200
-		player.blackLoadOut();
+		player.redLoadOut();
 		// sets player to gun suit
 		enemies = new ArrayList<character>();
 		for (int x = 0; x != 20; x++) {
@@ -40,11 +40,11 @@ public class training {
 		atkCount++;
 		// moves player
 		for (character e : enemies) {
-			e.move();
 			if (atkCount == 20) {
 				e.attack();
 				atkCount = 0;
 			}
+			e.move();
 		}
 		// moves enemies
 		check();

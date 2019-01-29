@@ -121,12 +121,12 @@ public class character extends object {
 		// dummy suit
 		mysp = sp.soldier;
 		// sets personal sprites to gray
-		atk = 0;
+		atk = 1;
 		def = 0;
 		hp = 2;
 		// sets stats (all low)
 		dx = -2;
-		range = 0;
+		range = -500;
 		type = 0;
 		// sets movement speed (walk speed) and range (nonexistent)
 	}
@@ -158,26 +158,25 @@ public class character extends object {
 	public void move() {
 		if (isDead) {
 			x += dx;
-			return;
+		} else {
+			count++;
+			if (count <= 10)
+				currsp = mysp[1];
+			if (count > 10)
+				currsp = mysp[2];
+			if (count > 20)
+				currsp = mysp[3];
+			if (count > 30)
+				currsp = mysp[2];
+			if (count > 40) {
+				currsp = mysp[1];
+				count = 0;
+			}
+			super.move();
 		}
-		// if dead, continue to move but nothing else
-		count++;
-		if (count <= 10)
-			currsp = mysp[1];
-		if (count > 10)
-			currsp = mysp[2];
-		if (count > 20)
-			currsp = mysp[3];
-		if (count > 30)
-			currsp = mysp[2];
-		if (count > 40) {
-			currsp = mysp[1];
-			count = 0;
-		}
-		// increment count and adjust walk animation
+		// increment count and adjust walk animation if alive, otherwise keep the dead animation
 		check();
 		// check any out of range attacks
-		super.move();
 		// moves self
 		for (attack a : attacks)
 			a.move();
@@ -185,8 +184,10 @@ public class character extends object {
 	}
 
 	public void attack() {
-		attacks.add(new attack(this, type));
-		// adds a new attack
+		if (!isDead) {
+			attacks.add(new attack(this, type));
+		}
+		// adds a new attack if alive
 	}
 
 	public boolean checkHits(character c) {
