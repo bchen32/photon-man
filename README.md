@@ -1,6 +1,6 @@
 # PhotonMan
 
-*Don’t forget to always pull before making changes*
+*Don’t forget to pull before making changes if you want your local version to stay up to date*
 
 Arik Baron, Ben Chen, Cameron Egbert, Ben Guan, Joey Ilagan
 
