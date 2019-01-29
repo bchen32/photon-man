@@ -18,6 +18,7 @@ public class object {
 	int dy;
 	// movement speed
 	boolean visible;
+	// visibility
 
 	public object(sprites sp, int x, int y, int w, int h) {
 
@@ -48,13 +49,4 @@ public class object {
 		return new Rectangle(x, y, w, h);
 		// returns rectangle according to location and dimensions
 	}
-
-	public boolean xUp() {
-		return true;
-	}
-
-	private boolean xDown() {
-		return true;
-	}
-
 }
