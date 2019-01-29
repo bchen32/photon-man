@@ -4,148 +4,100 @@ import java.util.ArrayList;
 
 public class character extends object {
 
-	boolean id;
-	// true is main character
-	int atk;
-	int def;
-	int hp;
-	// stats
-	boolean hasJumped1;
-	boolean hasJumped2;
-	// checks if character has jumped or double jumped
+	int health;
+	// health 
+	int damage;
+	// strength of attacks
+	int moveSpeed;
+	// move speed when holding a key
+	int energy;
+	// current energy
+	int energyGain;
+	// energy gained via capsules
+	int energyUse;
+	// energy lost when shooting
+	int stunCount;
+	// current stun (greater than zero means stunned)
+	boolean isGood;
+	// checks if character is Photon Man
+	boolean hasShield;
+	// checks if character has shield active
 	boolean isDead;
 	// checks if the character is dead
 	int type;
 	// type of attack
-	int range;
-	// range of attack
 	ArrayList<attack> attacks;
 	// stores all attacks
-	int count;
+	int walkCount;
 	// regulates the walk animation
 
-	public character(sprites sp, int x, int y, boolean id) {
+	public character(sprites sp, int x, int y) {
 		super(sp, x, y, 40, 40);
-		this.id = id;
 		// creates 40x40 object at the given location
-		hasJumped1 = false;
-		hasJumped2 = false;
-		// character hasn't jumped prior to creation
+		defaultLoadOut();
+	}
+	
+	public void defaultLoadOut() {
+		health = 100000;
+		damage = 1;
+		moveSpeed = 2;
+		energy = 100;
+		energyGain = 5;
+		energyUse = 10;
+		stunCount = 0;
+		isGood = true; 
+		hasShield = true;
 		isDead = false;
-		// character is alive
+		type = 0;
 		attacks = new ArrayList<attack>();
-		// instantiates attacks
-		count = 0;
-		// instantiates count
+		walkCount = 0;
 	}
-
-	public void redLoadOut() {
-		// gun suit
-		mysp = sp.red;
-		// sets personal sprites to red
-		atk = 10;
-		def = 5;
-		hp = 10;
-		// sets stats (average)
-		type = 0;
-		range = 300;
-		// sets type and range (average)
+	
+	public void setLoadOut(String s) {
+		defaultLoadOut();
+		if(s.equals("red"))
+			mysp = sp.red;
+		if(s.equals("blue")) {
+			mysp = sp.blue;
+			damage = 2;
+			energyUse = 2;
+			type = 1;
+		}
+		if(s.equals("green")) {
+			mysp = sp.green;
+			stunCount = -1000000;
+			moveSpeed = 1;
+			type = 2;
+		}
+		if(s.equals("purple")) {
+			mysp = sp.purple;
+			energyGain = 10;
+		}
+		if(s.equals("orange")) {
+			mysp = sp.orange;
+			moveSpeed = 3;
+		}
+		if(s.equals("black")) {
+			mysp = sp.black;
+			damage = 3;
+			hasShield = false;
+			type = 2;
+		}
+		if(s.equals("scientist")) {
+			mysp = sp.scientist;
+			health = 1;
+			isGood = false;
+			dx = -2;
+		}
+		if(s.equals("soldier")) {
+			mysp = sp.soldier;
+			health = 2;
+			isGood = false;
+			dx = -2;
+		}
 	}
+	
 
-	public void blueLoadOut() {
-		// sword suit
-		mysp = sp.blue;
-		// sets personal sprites to blue
-		atk = 12;
-		def = 3;
-		hp = 10;
-		// sets stats (high atk, low def)
-		type = 1;
-		range = 100;
-		// sets type and range (low)
-	}
-
-	public void greenLoadOut() {
-		// shield suit
-		mysp = sp.green;
-		// sets personal sprites to green
-		atk = 8;
-		def = 6;
-		hp = 11;
-		// sets stats (low atk, high def and hp)
-		type = 2;
-		range = 500;
-		// sets type and range (high)
-	}
-
-	public void purpleLoadOut() {
-		// shield suit
-		mysp = sp.purple;
-		// sets personal sprites to green
-		atk = 8;
-		def = 6;
-		hp = 11;
-		// sets stats (low atk, high def and hp)
-		type = 2;
-		range = 500;
-		// sets type and range (high)
-	}
-
-	public void orangeLoadOut() {
-		// shield suit
-		mysp = sp.orange;
-		// sets personal sprites to green
-		atk = 8;
-		def = 6;
-		hp = 11;
-		// sets stats (low atk, high def and hp)
-		type = 2;
-		range = 500;
-		// sets type and range (high)
-	}
-
-	public void blackLoadOut() {
-		// shield suit
-		mysp = sp.black;
-		// sets personal sprites to green
-		atk = 8;
-		def = 6;
-		hp = 11;
-		// sets stats (low atk, high def and hp)
-		type = 2;
-		range = 500;
-		// sets type and range (high)
-	}
-
-	public void Soldier() {
-		// dummy suit
-		mysp = sp.soldier;
-		// sets personal sprites to gray
-		atk = 1;
-		def = 0;
-		hp = 2;
-		// sets stats (all low)
-		dx = -2;
-		range = -500;
-		type = 0;
-		// sets movement speed (walk speed) and range (nonexistent)
-	}
-
-	public void Scientist() {
-		// dummy suit
-		mysp = sp.scientist;
-		// sets personal sprites to gray
-		atk = 0;
-		def = 0;
-		hp = 1;
-		// sets stats (all low)
-		dx = -2;
-		range = 0;
-		type = 0;
-		// sets movement speed (walk speed) and range (nonexistent)
-	}
-
-	@Override
 	public void draw(Graphics g) {
 		for (attack a : attacks)
 			a.draw(g);
@@ -153,39 +105,42 @@ public class character extends object {
 		super.draw(g);
 		// draws self
 	}
-
-	@Override
 	public void move() {
 		if (isDead) {
 			x += dx;
-		} else {
-			count++;
-			if (count <= 10)
-				currsp = mysp[1];
-			if (count > 10)
-				currsp = mysp[2];
-			if (count > 20)
-				currsp = mysp[3];
-			if (count > 30)
-				currsp = mysp[2];
-			if (count > 40) {
-				currsp = mysp[1];
-				count = 0;
-			}
-			super.move();
+			return;
 		}
+		
+		walkAnimation();
 		// increment count and adjust walk animation if alive, otherwise keep the dead animation
 		check();
-		// check any out of range attacks
+		// removes invisible attacks
+		super.move();
 		// moves self
 		for (attack a : attacks)
 			a.move();
 		// moves attacks
 	}
+	
+	public void walkAnimation() {
+		walkCount++;
+		if (walkCount <= 10)
+			currsp = mysp[1];
+		if (walkCount > 10)
+			currsp = mysp[2];
+		if (walkCount > 20)
+			currsp = mysp[3];
+		if (walkCount > 30)
+			currsp = mysp[2];
+		if (walkCount > 40) {
+			currsp = mysp[1];
+			walkCount = 0;
+		}
+	}
 
 	public void attack() {
 		if (!isDead) {
-			attacks.add(new attack(this, type));
+			attacks.add(new attack(this));
 		}
 		// adds a new attack if alive
 	}
@@ -205,12 +160,7 @@ public class character extends object {
 				// checks if attack hit enemy
 				check = true;
 				// will return true (hit confirmed)
-				int dmg = a.atk - c.def;
-				// calculates damage based on personal atk and enemy def
-				if (dmg < 0)
-					dmg = 0;
-				// damage minimum is 0
-				c.hp -= dmg;
+				c.health -= damage;
 				// adjust enemy health
 				attacks.remove(x);
 				// removes attack from attacks
