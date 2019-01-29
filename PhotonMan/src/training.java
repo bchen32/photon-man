@@ -7,19 +7,15 @@ public class training {
 	// player character
 	ArrayList<character> enemies;
 	// enemy characters
-	int atkCount;
 
 	public training(sprites sp) {
-		player = new character(sp, 20, 200, true);
-		atkCount = 0;
+		player = new character(sp, 20, 200);
 		// creates new player at 20, 200
-		player.redLoadOut();
-		// sets player to gun suit
+		player.setLoadOut("black");
 		enemies = new ArrayList<character>();
 		for (int x = 0; x != 20; x++) {
-			character e = new character(sp, 600 + x * 300, 200, false);
-
-			e.Soldier();
+			character e = new character(sp, 600 + x * 300, 200);
+			e.setLoadOut("soldier");
 			enemies.add(e);
 		}
 		// creates and instantiates enemies
@@ -37,15 +33,9 @@ public class training {
 
 	public void move() {
 		player.move();
-		atkCount++;
 		// moves player
-		for (character e : enemies) {
-			if (atkCount == 20) {
-				e.attack();
-				atkCount = 0;
-			}
+		for (character e : enemies)
 			e.move();
-		}
 		// moves enemies
 		check();
 		// checks collision and out of bounds
@@ -63,7 +53,7 @@ public class training {
 		for (int x = 0; x != enemies.size(); x++) {
 			character e = enemies.get(x);
 			player.checkHits(e);
-			if (e.hp <= 0) {
+			if (e.health <= 0) {
 				e.isDead = true;
 				e.currsp = e.mysp[4];
 			}
