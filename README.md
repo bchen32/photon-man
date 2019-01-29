@@ -1,6 +1,6 @@
 # PhotonMan
 
-Don’t forget to always pull before making changes
+*Don’t forget to always pull before making changes*
 
 Arik Baron, Ben Chen, Cameron Egbert, Ben Guan, Joey Ilagan
 
