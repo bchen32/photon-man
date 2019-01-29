@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 
 public class attack extends object {
 

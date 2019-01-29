@@ -7,6 +7,7 @@ public class training {
 	// player character
 	ArrayList<character> enemies;
 	// enemy characters
+//	int attackCount = 0;
 
 	public training(sprites sp) {
 		player = new character(sp, 20, 200);
@@ -34,8 +35,15 @@ public class training {
 	public void move() {
 		player.move();
 		// moves player
-		for (character e : enemies)
+//		attackCount++;
+		for (character e : enemies) {
+//			if (attackCount == 20) {
+//				// attacks every 20 frames
+//				attackCount = 0;
+//				e.attack();
+//			}
 			e.move();
+		}
 		// moves enemies
 		check();
 		// checks collision and out of bounds

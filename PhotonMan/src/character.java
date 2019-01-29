@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class character extends object {
 
 	int health;
-	// health 
+	// health
 	int damage;
 	// strength of attacks
 	int moveSpeed;
@@ -36,7 +36,7 @@ public class character extends object {
 		// creates 40x40 object at the given location
 		defaultLoadOut();
 	}
-	
+
 	public void defaultLoadOut() {
 		health = 100000;
 		damage = 1;
@@ -45,59 +45,59 @@ public class character extends object {
 		energyGain = 5;
 		energyUse = 10;
 		stunCount = 0;
-		isGood = true; 
+		isGood = true;
 		hasShield = true;
 		isDead = false;
 		type = 0;
 		attacks = new ArrayList<attack>();
 		walkCount = 0;
 	}
-	
+
 	public void setLoadOut(String s) {
 		defaultLoadOut();
-		if(s.equals("red"))
+		if (s.equals("red"))
 			mysp = sp.red;
-		if(s.equals("blue")) {
+		if (s.equals("blue")) {
 			mysp = sp.blue;
 			damage = 2;
 			energyUse = 2;
 			type = 1;
 		}
-		if(s.equals("green")) {
+		if (s.equals("green")) {
 			mysp = sp.green;
 			stunCount = -1000000;
 			moveSpeed = 1;
 			type = 2;
 		}
-		if(s.equals("purple")) {
+		if (s.equals("purple")) {
 			mysp = sp.purple;
 			energyGain = 10;
 		}
-		if(s.equals("orange")) {
+		if (s.equals("orange")) {
 			mysp = sp.orange;
 			moveSpeed = 3;
 		}
-		if(s.equals("black")) {
+		if (s.equals("black")) {
 			mysp = sp.black;
 			damage = 3;
 			hasShield = false;
 			type = 2;
 		}
-		if(s.equals("scientist")) {
+		if (s.equals("scientist")) {
 			mysp = sp.scientist;
 			health = 1;
 			isGood = false;
 			dx = -2;
 		}
-		if(s.equals("soldier")) {
+		if (s.equals("soldier")) {
 			mysp = sp.soldier;
 			health = 2;
 			isGood = false;
 			dx = -2;
 		}
 	}
-	
 
+	@Override
 	public void draw(Graphics g) {
 		for (attack a : attacks)
 			a.draw(g);
@@ -105,23 +105,25 @@ public class character extends object {
 		super.draw(g);
 		// draws self
 	}
+
+	@Override
 	public void move() {
 		if (isDead) {
 			x += dx;
-			return;
+			// body keeps moving
+		} else {
+			walkAnimation();
+			// adjust walk animation
+			super.move();
+			// moves self
 		}
-		
-		walkAnimation();
-		// increment count and adjust walk animation if alive, otherwise keep the dead animation
 		check();
-		// removes invisible attacks
-		super.move();
-		// moves self
+		// removes invisible attacks regardless of death
 		for (attack a : attacks)
 			a.move();
-		// moves attacks
+		// moves attacks regardless of death
 	}
-	
+
 	public void walkAnimation() {
 		walkCount++;
 		if (walkCount <= 10)
