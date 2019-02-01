@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class character extends object {
@@ -30,6 +31,8 @@ public class character extends object {
 	// stores all attacks
 	int walkCount;
 	// regulates the walk animation
+	BufferedImage profile;
+	// image for profile
 
 	public character(sprites sp, int x, int y) {
 		super(sp, x, y, 40, 40);
@@ -51,37 +54,45 @@ public class character extends object {
 		type = 0;
 		attacks = new ArrayList<attack>();
 		walkCount = 0;
+		profile = null;
 	}
 
 	public void setLoadOut(String s) {
 		defaultLoadOut();
-		if (s.equals("red"))
+		if (s.equals("red")) {
 			mysp = sp.red;
+			profile = sp.icons[0];
+		}
 		if (s.equals("blue")) {
 			mysp = sp.blue;
 			damage = 2;
 			energyUse = 2;
 			type = 1;
+			profile = sp.icons[1];
 		}
 		if (s.equals("green")) {
 			mysp = sp.green;
 			stunCount = -1000000;
 			moveSpeed = 1;
 			type = 2;
+			profile = sp.icons[2];
 		}
 		if (s.equals("purple")) {
 			mysp = sp.purple;
 			energyGain = 10;
+			profile = sp.icons[3];
 		}
 		if (s.equals("orange")) {
 			mysp = sp.orange;
 			moveSpeed = 3;
+			profile = sp.icons[4];
 		}
 		if (s.equals("black")) {
 			mysp = sp.black;
 			damage = 3;
 			hasShield = false;
 			type = 2;
+			profile = sp.icons[5];
 		}
 		if (s.equals("scientist")) {
 			mysp = sp.scientist;
@@ -108,6 +119,10 @@ public class character extends object {
 
 	@Override
 	public void move() {
+		if(isGood) {
+			if(x + dx < 0 || x + dx > 480 - w) dx = 0;
+			if(y + dy < 0 || y + dy > 240 - h) dy = 0;
+		}
 		if (isDead) {
 			x += dx;
 			// body keeps moving
@@ -141,9 +156,11 @@ public class character extends object {
 	}
 
 	public void attack() {
+		if(energy < energyUse) return;
 		if (!isDead) {
 			attacks.add(new attack(this));
 		}
+		if(isGood) energy -= energyUse;
 		// adds a new attack if alive
 	}
 
