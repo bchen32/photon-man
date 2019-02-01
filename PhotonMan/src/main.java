@@ -77,9 +77,6 @@ public class main extends JPanel implements ActionListener {
 			int key = e.getKeyCode();
 			if (state.equals("training")) {
 				// if the game state is training...
-				if (key == KeyEvent.VK_SPACE)
-					tr.player.attack();
-				// z triggers player attack
 				if (key == KeyEvent.VK_W)
 					tr.player.dy = -2;
 				if (key == KeyEvent.VK_S)
@@ -88,6 +85,8 @@ public class main extends JPanel implements ActionListener {
 					tr.player.dx = 2;
 				if (key == KeyEvent.VK_A)
 					tr.player.dx = -2;
+				if (key == KeyEvent.VK_R)
+					tr.player.energy = 100;
 			}
 		}
 
