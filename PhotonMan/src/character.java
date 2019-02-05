@@ -37,7 +37,13 @@ public class character extends object {
 		// creates 40x40 object at the given location
 		setLoadOut(loadout);
 	}
-
+	
+	public character(sprites sp, int x, int y) {
+		super(sp, x, y, 40, 40);
+		// creates 40x40 object at the given location
+		defaultLoadOut();
+	}
+	
 	public void defaultLoadOut() {
 		health = 100000;
 		damage = 1;
@@ -56,8 +62,6 @@ public class character extends object {
 
 	public void setLoadOut(String s) {
 		defaultLoadOut();
-		if (s.equals("red"))
-			mysp = sp.red;
 		if (s.equals("blue")) {
 			mysp = sp.blue;
 			damage = 2;
