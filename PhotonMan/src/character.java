@@ -126,6 +126,10 @@ public class character extends object {
 
 	@Override
 	public void move() {
+		if(isGood) {
+			if(x + dx > 480 - w) dx = 0;
+			if(y + dy < 0 || y + dy > 240 - h) dy = 0;
+		}
 		if (isDead) {
 			x += dx;
 			// body keeps moving
