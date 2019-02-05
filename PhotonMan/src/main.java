@@ -44,7 +44,7 @@ public class main extends JPanel implements ActionListener {
 		timer = new Timer(DELAY, this);
 		timer.start();
 		// creates and starts the timer
-		state = "training";
+		state = "loadout";
 		// sets the current state to training
 		tr = new training(sp);
 		// instantiates training
