@@ -26,7 +26,8 @@ public class main extends JPanel implements ActionListener {
 	// current game state
 	training tr;
 	// training mode game state
-
+	loadOut lo;
+	//loadout select game state
 	public main() {
 
 		initboard();
@@ -47,6 +48,7 @@ public class main extends JPanel implements ActionListener {
 		// sets the current state to training
 		tr = new training(sp);
 		// instantiates training
+		lo = new loadOut(sp, tr.player);
 	}
 
 	@Override
@@ -60,7 +62,9 @@ public class main extends JPanel implements ActionListener {
 	private void doDrawing(Graphics g) {
 		if (state.equals("training"))
 			tr.draw(g);
-		// if the game state is training, draw training
+		if(state.equals("loadout"))
+			lo.draw(g);
+		// if the game state is x, draw x
 	}
 
 	@Override
@@ -68,15 +72,32 @@ public class main extends JPanel implements ActionListener {
 		repaint();
 		if (state.equals("training"))
 			tr.move();
-		// if the game state is training, move training
+		if (state.equals("loadout"))
+			lo.move();
+		// if the game state is x, move x
 	}
 
 	private class KAdapter extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
+			
+			if(state.equals("loadout")) {
+				//if game state is loadout...
+				if (key == KeyEvent.VK_D)
+					lo.selectRight();
+				if (key == KeyEvent.VK_A)
+					lo.selectLeft();
+				if (key == KeyEvent.VK_SPACE) {
+					tr.player.setLoadOut(lo.select());
+					state = "training";
+				}
+			}  
 			if (state.equals("training")) {
 				// if the game state is training...
+				if (key == KeyEvent.VK_SPACE)
+					tr.player.attack();
+				// z triggers player attack
 				if (key == KeyEvent.VK_W)
 					tr.player.dy = -2;
 				if (key == KeyEvent.VK_S)
@@ -85,9 +106,10 @@ public class main extends JPanel implements ActionListener {
 					tr.player.dx = 2;
 				if (key == KeyEvent.VK_A)
 					tr.player.dx = -2;
-				if (key == KeyEvent.VK_R)
-					tr.player.energy = 100;
+				if(key == KeyEvent.VK_E)
+					state = "loadout";
 			}
+			
 		}
 
 		@Override
