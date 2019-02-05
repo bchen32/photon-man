@@ -5,26 +5,37 @@ import java.util.ArrayList;
 
 public class character extends object {
 
-	int health; // health
-	int damage; // strength of attacks
-	int moveSpeed; // move speed when holding a key
-	int energy; // current energy
-	int energyGain; // energy gained via capsules
-	int energyUse; // energy lost when shooting
-	int stunCount; // current stun (greater than zero means stunned)
-	boolean isGood; // checks if character is Photon Man
-	boolean hasShield; // checks if character has shield active
-	boolean isDead; // checks if the character is dead
-	boolean isRunning; // checks if running animation is necessary
-	int type; // type of attack
-	ArrayList<attack> attacks; // stores all attacks
-	int walkCount; // regulates the walk animation
-	BufferedImage profile; // image for profile
+	int health;
+	// health
+	int damage;
+	// strength of attacks
+	int moveSpeed;
+	// move speed when holding a key
+	int energy;
+	// current energy
+	int energyGain;
+	// energy gained via capsules
+	int energyUse;
+	// energy lost when shooting
+	int stunCount;
+	// current stun (greater than zero means stunned)
+	boolean isGood;
+	// checks if character is Photon Man
+	boolean hasShield;
+	// checks if character has shield active
+	boolean isDead;
+	// checks if the character is dead
+	int type;
+	// type of attack
+	ArrayList<attack> attacks;
+	// stores all attacks
+	int walkCount;
+	// regulates the walk animation
 
-	public character(sprites sp, int x, int y) {
-		super(sp, x, y, 40, 40); 
+	public character(sprites sp, int x, int y, String loadout) {
+		super(sp, x, y, 40, 40);
 		// creates 40x40 object at the given location
-		defaultLoadOut();
+		setLoadOut(loadout);
 	}
 
 	public void defaultLoadOut() {
@@ -38,56 +49,45 @@ public class character extends object {
 		isGood = true;
 		hasShield = true;
 		isDead = false;
-		isRunning = true;
 		type = 0;
 		attacks = new ArrayList<attack>();
 		walkCount = 0;
-		profile = null;
 	}
 
 	public void setLoadOut(String s) {
 		defaultLoadOut();
-		if (s.equals("red")) {
+		if (s.equals("red"))
 			mysp = sp.red;
-			profile = sp.icons[0];
-		}
 		if (s.equals("blue")) {
 			mysp = sp.blue;
 			damage = 2;
 			energyUse = 2;
 			type = 1;
-			profile = sp.icons[1];
 		}
 		if (s.equals("green")) {
 			mysp = sp.green;
 			stunCount = -1000000;
 			moveSpeed = 1;
 			type = 2;
-			profile = sp.icons[2];
 		}
 		if (s.equals("purple")) {
 			mysp = sp.purple;
 			energyGain = 10;
-			profile = sp.icons[3];
 		}
 		if (s.equals("orange")) {
 			mysp = sp.orange;
 			moveSpeed = 3;
-			profile = sp.icons[4];
 		}
 		if (s.equals("black")) {
 			mysp = sp.black;
 			damage = 3;
 			hasShield = false;
 			type = 2;
-			profile = sp.icons[5];
 		}
 		if (s.equals("scientist")) {
 			mysp = sp.scientist;
 			health = 1;
 			isGood = false;
-			isRunning = false;
-			currsp = mysp[0];
 			dx = -2;
 		}
 		if (s.equals("soldier")) {
@@ -96,6 +96,24 @@ public class character extends object {
 			isGood = false;
 			dx = -2;
 		}
+	}
+	//returns loadouts
+	public String getLoadOut() {
+		if(mysp.equals(sp.red))
+			return "red";
+		if(mysp.equals(sp.blue))
+			return "blue";
+		if(mysp.equals(sp.green))
+			return "green";
+		if(mysp.equals(sp.orange))
+			return "orange";
+		if(mysp.equals(sp.purple))
+			return "purple";
+		if(mysp.equals(sp.black))
+			return "black";
+		if(mysp.equals(sp.scientist))
+			return "scientist";
+			return "soldier";
 	}
 
 	@Override
