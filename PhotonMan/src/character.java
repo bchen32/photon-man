@@ -31,7 +31,8 @@ public class character extends object {
 	// stores all attacks
 	int walkCount;
 	// regulates the walk animation
-
+	boolean isRunning;
+	
 	public character(sprites sp, int x, int y, String loadout) {
 		super(sp, x, y, 40, 40);
 		// creates 40x40 object at the given location
