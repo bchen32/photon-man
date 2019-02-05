@@ -65,16 +65,41 @@ public class training {
 			}
 		}
 		// checks out of bounds
-
+		player.stuckRight = false;
+		character e;
 		for (int x = 0; x != enemies.size(); x++) {
-			character e = enemies.get(x);
+			
+				e = enemies.get(x);
 			player.checkHits(e);
 			if (e.health <= 0) {
 				e.isDead = true;
 				e.currsp = e.mysp[4];
 			}
+			
+			playerCollide(e);
+		
 		}
+		
+		playerCollide(box);
 		// checks collision
 	}
-
+	
+	public void playerCollide(object a) {
+		if(a instanceof character) 
+		{
+			character e = ((character) a);
+			if(!e.isDead)
+			if(!(player.y + player.h < e.y || player.y > e.y + e.h))
+				if(player.x + player.w >= e.x - player.dx && player.x + player.w <= e.x + player.dx) {
+					player.stuckRight = true;
+					player.x += e.dx;
+				}
+		}else {
+			if(!(player.y + player.h < a.y || player.y > a.y + a.h))
+				if(player.x + player.w >= a.x - player.dx && player.x + player.w <= a.x + player.dx) {
+					player.stuckRight = true;
+					player.x += a.dx;
+				}
+		}
+	}
 }
