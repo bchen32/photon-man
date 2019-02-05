@@ -19,7 +19,9 @@ public class object {
 	// movement speed
 	boolean visible;
 	// visibility
-
+	boolean stuckRight = false, stuckLeft = false, stuckUp = false;
+	//collision variables
+	
 	public object(sprites sp, int x, int y, int w, int h) {
 
 		this.sp = sp;
@@ -40,9 +42,14 @@ public class object {
 	}
 
 	public void move() {
-		x += dx;
-		y += dy;
-		// moves self according to movement speed
+		if(!stuckRight && dx > 0)
+			x += dx; 
+		else if (dx < 0 && !stuckLeft)
+			x += dx;
+		
+		if(!stuckUp)
+			y += dy;
+		// moves self according to movement speed and collision variables
 	}
 
 	public Rectangle getHitBox() {
