@@ -8,16 +8,15 @@ public class training {
 	// player character
 	ArrayList<character> enemies;
 	// enemy characters
+	
 //	int attackCount = 0;
 
 	public training(sprites sp) {
-		player = new character(sp, 20, 140);
+		player = new character(sp, 20, 140, "red");
 		// creates new player at 20, 200
-		player.setLoadOut("black");
 		enemies = new ArrayList<character>();
 		for (int x = 0; x != 20; x++) {
-			character e = new character(sp, 600 + x * 300, 140);
-			e.setLoadOut("scientist");
+			character e = new character(sp, 600 + x * 300, 140, "scientist");
 			enemies.add(e);
 		}
 		// creates and instantiates enemies
@@ -37,7 +36,7 @@ public class training {
 		g.fillRect(0, 240, 480, 60);
 		g.setColor(Color.WHITE);
 		g.fillRect(60, 260, player.energy, 10);
-		g.drawImage(player.profile, 20, 255, null);
+		player.draw(g);
 	}
 
 	public void move() {
@@ -79,8 +78,8 @@ public class training {
 			playerCollide(e);
 		
 		}
+	
 		
-		playerCollide(box);
 		// checks collision
 	}
 	

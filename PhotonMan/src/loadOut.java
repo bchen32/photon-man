@@ -8,7 +8,7 @@ public class loadOut {
 	int selected;
 	character[] loadouts;
 	selection[] boxes;
-	String[] colors = {"red", "blue", "green", "orange", "purple","black"};
+	String[] colors = {"red", "blue", "green", "orange", "purple", "black"};
 	
 	public loadOut(sprites sp, character current) {
 		curr = current;
@@ -46,7 +46,6 @@ public class loadOut {
 	public void draw(Graphics g) {
 		for(int i = 0; i < loadouts.length; i++)
 			loadouts[i].draw(g);
-		
 			boxes[selected].draw(g);	
 	}
 	

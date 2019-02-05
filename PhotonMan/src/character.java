@@ -1,6 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class character extends object {
@@ -31,20 +30,13 @@ public class character extends object {
 	// stores all attacks
 	int walkCount;
 	// regulates the walk animation
-	boolean isRunning;
-	
+
 	public character(sprites sp, int x, int y, String loadout) {
 		super(sp, x, y, 40, 40);
 		// creates 40x40 object at the given location
 		setLoadOut(loadout);
 	}
-	
-	public character(sprites sp, int x, int y) {
-		super(sp, x, y, 40, 40);
-		// creates 40x40 object at the given location
-		defaultLoadOut();
-	}
-	
+
 	public void defaultLoadOut() {
 		health = 100000;
 		damage = 1;
@@ -63,6 +55,8 @@ public class character extends object {
 
 	public void setLoadOut(String s) {
 		defaultLoadOut();
+		if (s.equals("red"))
+			mysp = sp.red;
 		if (s.equals("blue")) {
 			mysp = sp.blue;
 			damage = 2;
@@ -132,16 +126,11 @@ public class character extends object {
 
 	@Override
 	public void move() {
-		if(isGood) {
-			if(x + dx > 480 - w) dx = 0;
-			if(y + dy < 0 || y + dy > 240 - h) dy = 0;
-		}
 		if (isDead) {
 			x += dx;
 			// body keeps moving
 		} else {
-			if(isRunning)
-				walkAnimation();
+			walkAnimation();
 			// adjust walk animation
 			super.move();
 			// moves self
@@ -177,6 +166,7 @@ public class character extends object {
 		if(isGood) energy -= energyUse;
 		// adds a new attack if alive
 	}
+
 
 	public boolean checkHits(character c) {
 		if (c.isDead)

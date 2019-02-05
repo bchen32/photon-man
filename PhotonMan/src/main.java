@@ -64,7 +64,7 @@ public class main extends JPanel implements ActionListener {
 			tr.draw(g);
 		if(state.equals("loadout"))
 			lo.draw(g);
-		// if the game state is x, draw x
+		// if the game state is training, draw training
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class main extends JPanel implements ActionListener {
 			tr.move();
 		if (state.equals("loadout"))
 			lo.move();
-		// if the game state is x, move x
+		// if the game state is training, move training
 	}
 
 	private class KAdapter extends KeyAdapter {
