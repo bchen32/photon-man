@@ -17,8 +17,11 @@ public class selection extends object{
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(new Color(255, 250, 150, 100));
-		if(visible)
+		if(visible) {
+		g.setColor(new Color(255, 255, 0, 180));
 		g.fillRect(x, y, w, h);
+		g.setColor(Color.black);
+		g.drawRect(x, y, w, h);
+		}
 	}
 }
