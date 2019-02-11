@@ -95,6 +95,7 @@ public class character extends object {
 			isGood = false;
 			dx = -2;
 		}
+		updateStats();
 	}
 	//returns loadouts
 	public String getLoadOut() {
@@ -113,6 +114,14 @@ public class character extends object {
 		if(mysp.equals(sp.scientist))
 			return "scientist";
 			return "soldier";
+	}
+	
+	public void updateStats() {
+		stats[0] = moveSpeed; 
+		stats[1] = damage;
+		stats[2] = energyUse;
+		stats[3] = energyGain;
+		stats[4] = stunCount;
 	}
 
 	@Override
