@@ -26,12 +26,13 @@ public class character extends object {
 	// checks if the character is dead
 	int type;
 	// type of attack
-	int[] stats = {moveSpeed, damage, energyUse, energyGain, stunCount};
-	//array if the current stats health not included because it doesn't change
+	int[] stats = { moveSpeed, damage, energyUse, energyGain, stunCount };
+	// array if the current stats health not included because it doesn't change
 	ArrayList<attack> attacks;
 	// stores all attacks
 	int walkCount;
 	// regulates the walk animation
+	boolean up, down, left, right, loadout = false;
 
 	public character(sprites sp, int x, int y, String loadout) {
 		super(sp, x, y, 40, 40);
@@ -99,27 +100,28 @@ public class character extends object {
 		}
 		updateStats();
 	}
-	//returns loadouts
+
+	// returns loadouts
 	public String getLoadOut() {
-		if(mysp.equals(sp.red))
+		if (mysp.equals(sp.red))
 			return "red";
-		if(mysp.equals(sp.blue))
+		if (mysp.equals(sp.blue))
 			return "blue";
-		if(mysp.equals(sp.green))
+		if (mysp.equals(sp.green))
 			return "green";
-		if(mysp.equals(sp.orange))
+		if (mysp.equals(sp.orange))
 			return "orange";
-		if(mysp.equals(sp.purple))
+		if (mysp.equals(sp.purple))
 			return "purple";
-		if(mysp.equals(sp.black))
+		if (mysp.equals(sp.black))
 			return "black";
-		if(mysp.equals(sp.scientist))
+		if (mysp.equals(sp.scientist))
 			return "scientist";
-			return "soldier";
+		return "soldier";
 	}
-	
+
 	public void updateStats() {
-		stats[0] = moveSpeed; 
+		stats[0] = moveSpeed;
 		stats[1] = damage;
 		stats[2] = energyUse;
 		stats[3] = energyGain;
@@ -137,9 +139,35 @@ public class character extends object {
 
 	@Override
 	public void move() {
-		if(isGood) {
-			if(x + dx > 480 - w) dx = 0;
-			if(y + dy < 0 || y + dy > 240 - h) dy = 0;
+		if (!loadout) {
+			if (up || down) {
+				if (up && down) {
+					dy = 0;
+				} else if (up) {
+					dy = -2;
+				} else if (down) {
+					dy = 2;
+				}
+			} else {
+				dy = 0;
+			}
+			if (left || right) {
+				if (left && right) {
+					dx = 0;
+				} else if (left) {
+					dx = -2;
+				} else if (right) {
+					dx = 2;
+				}
+			} else {
+				dx = 0;
+			}
+		}
+		if (isGood) {
+			if (x + dx > 480 - w)
+				dx = 0;
+			if (y + dy < 0 || y + dy > 240 - h)
+				dy = 0;
 		}
 		if (isDead) {
 			x += dx;
@@ -174,14 +202,15 @@ public class character extends object {
 	}
 
 	public void attack() {
-		if(energy < energyUse) return;
+		if (energy < energyUse)
+			return;
 		if (!isDead) {
 			attacks.add(new attack(this));
 		}
-		if(isGood) energy -= energyUse;
+		if (isGood)
+			energy -= energyUse;
 		// adds a new attack if alive
 	}
-
 
 	public boolean checkHits(character c) {
 		if (c.isDead)
@@ -219,8 +248,9 @@ public class character extends object {
 				// removes attack from attacks and decrements
 			}
 		}
-		if(energy <= 0) {
-			energy = 0; health = 1;
+		if (energy <= 0) {
+			energy = 0;
+			health = 1;
 		}
 	}
 }

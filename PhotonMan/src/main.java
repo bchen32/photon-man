@@ -27,7 +27,8 @@ public class main extends JPanel implements ActionListener {
 	training tr;
 	// training mode game state
 	loadOut lo;
-	//loadout select game state
+
+	// loadout select game state
 	public main() {
 
 		initboard();
@@ -62,7 +63,7 @@ public class main extends JPanel implements ActionListener {
 	private void doDrawing(Graphics g) {
 		if (state.equals("training"))
 			tr.draw(g);
-		if(state.equals("loadout"))
+		if (state.equals("loadout"))
 			lo.draw(g);
 		// if the game state is training, draw training
 	}
@@ -81,35 +82,39 @@ public class main extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			
-			if(state.equals("loadout")) {
-				//if game state is loadout...
+
+			if (state.equals("loadout")) {
+				// if game state is loadout...
 				if (key == KeyEvent.VK_D)
 					lo.selectRight();
 				if (key == KeyEvent.VK_A)
 					lo.selectLeft();
 				if (key == KeyEvent.VK_SPACE) {
+					tr.player.loadout = false;
 					tr.player.setLoadOut(lo.select());
 					state = "training";
 				}
-			}  
-			if (state.equals("training")) {
-				// if the game state is training...
-				if (key == KeyEvent.VK_SPACE)
-					tr.player.attack();
-				// z triggers player attack
-				if (key == KeyEvent.VK_W)
-					tr.player.dy = -2;
-				if (key == KeyEvent.VK_S)
-					tr.player.dy = 2;
-				if (key == KeyEvent.VK_D)
-					tr.player.dx = 2;
-				if (key == KeyEvent.VK_A)
-					tr.player.dx = -2;
-				if(key == KeyEvent.VK_E)
-					state = "loadout";
 			}
-			
+			if (state.equals("training")) {
+				// if the game state is training.
+				if (key == KeyEvent.VK_W) {
+					tr.player.up = true;
+				}
+				if (key == KeyEvent.VK_S) {
+					tr.player.down = true;
+				}
+				if (key == KeyEvent.VK_D) {
+					tr.player.right = true;
+				}
+				if (key == KeyEvent.VK_A) {
+					tr.player.left = true;
+				}
+				if (key == KeyEvent.VK_E) {
+					tr.player.loadout = true;
+					state = "loadout";
+				}
+			}
+
 		}
 
 		@Override
@@ -119,15 +124,19 @@ public class main extends JPanel implements ActionListener {
 				// if the game state is training...
 				if (key == KeyEvent.VK_SPACE)
 					tr.player.attack();
-				// z triggers player attack
-				if (key == KeyEvent.VK_W)
-					tr.player.dy = 0;
-				if (key == KeyEvent.VK_S)
-					tr.player.dy = 0;
-				if (key == KeyEvent.VK_D)
-					tr.player.dx = 0;
-				if (key == KeyEvent.VK_A)
-					tr.player.dx = 0;
+				// space triggers player attack
+				if (key == KeyEvent.VK_W) {
+					tr.player.up = false;
+				}
+				if (key == KeyEvent.VK_S) {
+					tr.player.down = false;
+				}
+				if (key == KeyEvent.VK_D) {
+					tr.player.right = false;
+				}
+				if (key == KeyEvent.VK_A) {
+					tr.player.left = false;
+				}
 			}
 		}
 	}
