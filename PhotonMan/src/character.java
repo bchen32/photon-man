@@ -26,6 +26,8 @@ public class character extends object {
 	// checks if the character is dead
 	int type;
 	// type of attack
+	int[] stats = {moveSpeed, damage, energyUse, energyGain, stunCount};
+	//array if the current stats health not included because it doesn't change
 	ArrayList<attack> attacks;
 	// stores all attacks
 	int walkCount;
