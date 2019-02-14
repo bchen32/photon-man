@@ -8,8 +8,8 @@ public class training {
 	// player character
 	ArrayList<character> enemies;
 	// enemy characters
-	
-//	int attackCount = 0;
+
+	// int attackCount = 0;
 
 	public training(sprites sp) {
 		player = new character(sp, 20, 140, "red");
@@ -31,7 +31,7 @@ public class training {
 		// draws enemies
 		drawOverlay(g);
 	}
-	
+
 	public void drawOverlay(Graphics g) {
 		g.fillRect(0, 240, 480, 60);
 		g.setColor(Color.WHITE);
@@ -42,13 +42,13 @@ public class training {
 	public void move() {
 		player.move();
 		// moves player
-//		attackCount++;
+		// attackCount++;
 		for (character e : enemies) {
-//			if (attackCount == 20) {
-//				// attacks every 20 frames
-//				attackCount = 0;
-//				e.attack();
-//			}
+			// if (attackCount == 20) {
+			// // attacks every 20 frames
+			// attackCount = 0;
+			// e.attack();
+			// }
 			e.move();
 		}
 		// moves enemies
@@ -67,35 +67,33 @@ public class training {
 		player.stuckRight = false;
 		character e;
 		for (int x = 0; x != enemies.size(); x++) {
-			
-				e = enemies.get(x);
+
+			e = enemies.get(x);
 			player.checkHits(e);
 			if (e.health <= 0) {
 				e.isDead = true;
 				e.currsp = e.mysp[4];
 			}
-			
+
 			playerCollide(e);
-		
+
 		}
-	
-		
+
 		// checks collision
 	}
-	
+
 	public void playerCollide(object a) {
-		if(a instanceof character) 
-		{
+		if (a instanceof character) {
 			character e = ((character) a);
-			if(!e.isDead)
-			if(!(player.y + player.h < e.y || player.y > e.y + e.h))
-				if(player.x + player.w >= e.x - player.dx && player.x + player.w <= e.x + player.dx) {
-					player.stuckRight = true;
-					player.x += e.dx;
-				}
-		}else {
-			if(!(player.y + player.h < a.y || player.y > a.y + a.h))
-				if(player.x + player.w >= a.x - player.dx && player.x + player.w <= a.x + player.dx) {
+			if (!e.isDead)
+				if (!(player.y + player.h < e.y || player.y > e.y + e.h))
+					if (player.x + player.w >= e.x - player.dx && player.x + player.w <= e.x + player.dx) {
+						player.stuckRight = true;
+						player.x += e.dx;
+					}
+		} else {
+			if (!(player.y + player.h < a.y || player.y > a.y + a.h))
+				if (player.x + player.w >= a.x - player.dx && player.x + player.w <= a.x + player.dx) {
 					player.stuckRight = true;
 					player.x += a.dx;
 				}

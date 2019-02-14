@@ -139,7 +139,7 @@ public class character extends object {
 
 	@Override
 	public void move() {
-		if (!loadout) {
+		if (!loadout && isGood) {
 			if (up || down) {
 				if (up && down) {
 					dy = 0;
@@ -163,6 +163,9 @@ public class character extends object {
 				dx = 0;
 			}
 		}
+		if (!isGood) {
+			dx = -2;
+		}
 		if (isGood) {
 			if (x + dx > 480 - w)
 				dx = 0;
@@ -173,7 +176,7 @@ public class character extends object {
 			x += dx;
 			// body keeps moving
 		} else {
-			walkAnimation(dx);
+			walkAnimation(dx, isGood);
 			// adjust walk animation
 			super.move();
 			// moves self
@@ -185,27 +188,48 @@ public class character extends object {
 		// moves attacks regardless of death
 	}
 
-	public void walkAnimation(int speed) {
-		if (speed == 2) {
-			walkCount += 2;
-		} else if (speed == 0) {
-			walkCount++;
-		}
-		
-		if (speed == -2) {
-			currsp = mysp[0];
+	public void walkAnimation(int speed, boolean isGood) {
+		if (isGood) {
+			if (speed == 2 || speed == -2) {
+				walkCount++;
+			}
+			
+			if (speed == 0) {
+				currsp = mysp[0];
+			} else {
+				if (walkCount <= 10)
+					currsp = mysp[1];
+				if (walkCount > 10)
+					currsp = mysp[2];
+				if (walkCount > 20)
+					currsp = mysp[3];
+				if (walkCount > 30)
+					currsp = mysp[2];
+				if (walkCount > 40) {
+					currsp = mysp[1];
+					walkCount = 0;
+				}
+			}
 		} else {
-			if (walkCount <= 10)
-				currsp = mysp[1];
-			if (walkCount > 10)
-				currsp = mysp[2];
-			if (walkCount > 20)
-				currsp = mysp[3];
-			if (walkCount > 30)
-				currsp = mysp[2];
-			if (walkCount > 40) {
-				currsp = mysp[1];
-				walkCount = 0;
+			if (speed == -2 || speed == 2) {
+				walkCount++;
+			}
+			
+			if (speed == 0) {
+				currsp = mysp[0];
+			} else {
+				if (walkCount <= 10)
+					currsp = mysp[1];
+				if (walkCount > 10)
+					currsp = mysp[2];
+				if (walkCount > 20)
+					currsp = mysp[3];
+				if (walkCount > 30)
+					currsp = mysp[2];
+				if (walkCount > 40) {
+					currsp = mysp[1];
+					walkCount = 0;
+				}
 			}
 		}
 	}
