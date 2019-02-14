@@ -189,47 +189,24 @@ public class character extends object {
 	}
 
 	public void walkAnimation(int speed, boolean isGood) {
-		if (isGood) {
-			if (speed == 2 || speed == -2) {
-				walkCount++;
-			}
-			
-			if (speed == 0) {
-				currsp = mysp[0];
-			} else {
-				if (walkCount <= 10)
-					currsp = mysp[1];
-				if (walkCount > 10)
-					currsp = mysp[2];
-				if (walkCount > 20)
-					currsp = mysp[3];
-				if (walkCount > 30)
-					currsp = mysp[2];
-				if (walkCount > 40) {
-					currsp = mysp[1];
-					walkCount = 0;
-				}
-			}
+		if (speed == 2 || speed == -2) {
+			walkCount++;
+		}
+
+		if (speed == 0) {
+			currsp = mysp[0];
 		} else {
-			if (speed == -2 || speed == 2) {
-				walkCount++;
-			}
-			
-			if (speed == 0) {
-				currsp = mysp[0];
-			} else {
-				if (walkCount <= 10)
-					currsp = mysp[1];
-				if (walkCount > 10)
-					currsp = mysp[2];
-				if (walkCount > 20)
-					currsp = mysp[3];
-				if (walkCount > 30)
-					currsp = mysp[2];
-				if (walkCount > 40) {
-					currsp = mysp[1];
-					walkCount = 0;
-				}
+			if (walkCount <= 10)
+				currsp = mysp[1];
+			if (walkCount > 10)
+				currsp = mysp[2];
+			if (walkCount > 20)
+				currsp = mysp[3];
+			if (walkCount > 30)
+				currsp = mysp[2];
+			if (walkCount > 40) {
+				currsp = mysp[1];
+				walkCount = 0;
 			}
 		}
 	}
