@@ -10,7 +10,7 @@ Go to Tool Bar Visibility and check the box for "Git"
 
 Apply and Ok
 
-You can now pull, commit, and push to the repository straight from Eclipse
+You can now pull, commit, and push to the repository straight from Eclipse (PhotonMan must be added as a local repository first)
 
 *Don’t forget to pull before making changes if you want your local version to stay up to date and not introduce conflicts*
 
