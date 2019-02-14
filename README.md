@@ -1,8 +1,6 @@
 # PhotonMan
 
-# PSA
-
-*If you have Devstyle for Eclipse (the dark theme plugin), follow these steps to get integration with Eclipse
+# Eclipse Github Integration
 
 Window > Perspective > Customize Perspective > Action Set Availability
 
@@ -12,7 +10,7 @@ Go to Tool Bar Visibility and check the box for "Git"
 
 Apply and Ok
 
-You can now pull, commit, and push to the repository straight from Eclipse*
+You can now pull, commit, and push to the repository straight from Eclipse
 
 *Don’t forget to pull before making changes if you want your local version to stay up to date and not introduce conflicts*
 
