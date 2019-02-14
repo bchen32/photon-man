@@ -13,5 +13,5 @@ public class attack extends object {
 		// default move speed
 
 	}
-	
+
 }

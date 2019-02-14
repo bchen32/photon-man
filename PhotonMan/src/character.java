@@ -173,7 +173,7 @@ public class character extends object {
 			x += dx;
 			// body keeps moving
 		} else {
-			walkAnimation();
+			walkAnimation(dx);
 			// adjust walk animation
 			super.move();
 			// moves self
@@ -185,19 +185,28 @@ public class character extends object {
 		// moves attacks regardless of death
 	}
 
-	public void walkAnimation() {
-		walkCount++;
-		if (walkCount <= 10)
-			currsp = mysp[1];
-		if (walkCount > 10)
-			currsp = mysp[2];
-		if (walkCount > 20)
-			currsp = mysp[3];
-		if (walkCount > 30)
-			currsp = mysp[2];
-		if (walkCount > 40) {
-			currsp = mysp[1];
-			walkCount = 0;
+	public void walkAnimation(int speed) {
+		if (speed == 2) {
+			walkCount += 2;
+		} else if (speed == 0) {
+			walkCount++;
+		}
+		
+		if (speed == -2) {
+			currsp = mysp[0];
+		} else {
+			if (walkCount <= 10)
+				currsp = mysp[1];
+			if (walkCount > 10)
+				currsp = mysp[2];
+			if (walkCount > 20)
+				currsp = mysp[3];
+			if (walkCount > 30)
+				currsp = mysp[2];
+			if (walkCount > 40) {
+				currsp = mysp[1];
+				walkCount = 0;
+			}
 		}
 	}
 

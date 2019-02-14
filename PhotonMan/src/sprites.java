@@ -42,7 +42,7 @@ public class sprites {
 			soldier[x] = img.getSubimage(40 * x, 280, 40, 40);
 			smallobj[x] = img.getSubimage(20 * x, 320, 10, 10);
 		}
-		for(int x = 0; x != 6; x++)
+		for (int x = 0; x != 6; x++)
 			icons[x] = img.getSubimage(20 * x, 340, 20, 20);
 		largeobj[0] = img.getSubimage(120, 320, 40, 40);
 		largeobj[1] = img.getSubimage(160, 320, 40, 40);
