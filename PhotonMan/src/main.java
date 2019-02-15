@@ -85,14 +85,19 @@ public class main extends JPanel implements ActionListener {
 
 			if (state.equals("loadout")) {
 				// if game state is loadout...
-				if (key == KeyEvent.VK_D)
+				if (key == KeyEvent.VK_D) {
+					tr.player.right = true;
 					lo.selectRight();
-				if (key == KeyEvent.VK_A)
+				}
+				if (key == KeyEvent.VK_A) {
+					tr.player.left = true;
 					lo.selectLeft();
-				if (key == KeyEvent.VK_SPACE) {
-					tr.player.loadout = false;
-					tr.player.setLoadOut(lo.select());
-					state = "training";
+				}
+				if (key == KeyEvent.VK_W) {
+					tr.player.up = true;
+				}
+				if (key == KeyEvent.VK_S) {
+					tr.player.down = true;
 				}
 			}
 			if (state.equals("training")) {
@@ -110,7 +115,7 @@ public class main extends JPanel implements ActionListener {
 					tr.player.left = true;
 				}
 				if (key == KeyEvent.VK_E) {
-					tr.player.loadout = true;
+					
 					state = "loadout";
 				}
 			}
@@ -120,6 +125,24 @@ public class main extends JPanel implements ActionListener {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			int key = e.getKeyCode();
+			if (state.equals("loadout")) {
+				if (key == KeyEvent.VK_SPACE) {
+					tr.player.setLoadOut(lo.select());
+					state = "training";
+				}
+				if (key == KeyEvent.VK_W) {
+					tr.player.up = false;
+				}
+				if (key == KeyEvent.VK_S) {
+					tr.player.down = false;
+				}
+				if (key == KeyEvent.VK_D) {
+					tr.player.right = false;
+				}
+				if (key == KeyEvent.VK_A) {
+					tr.player.left = false;
+				}
+			}
 			if (state.equals("training")) {
 				// if the game state is training...
 				if (key == KeyEvent.VK_SPACE)

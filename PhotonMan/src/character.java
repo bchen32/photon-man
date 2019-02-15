@@ -32,7 +32,7 @@ public class character extends object {
 	// stores all attacks
 	int walkCount;
 	// regulates the walk animation
-	boolean up, down, left, right, loadout = false;
+	boolean up, down, left, right = false;
 
 	public character(sprites sp, int x, int y, String loadout) {
 		super(sp, x, y, 40, 40);
@@ -139,7 +139,7 @@ public class character extends object {
 
 	@Override
 	public void move() {
-		if (!loadout && isGood) {
+		if (isGood) {
 			if (up || down) {
 				if (up && down) {
 					dy = 0;
