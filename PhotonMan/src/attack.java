@@ -7,9 +7,9 @@ public class attack extends object {
 		currsp = sp.smallobj[c.type];
 		// sets sprite based on the type
 		if (c.isGood)
-			dx = c.moveSpeed * 2;
+			dx = c.moveSpeed * 2 + 2;
 		else
-			dx = c.moveSpeed * -2;
+			dx = c.moveSpeed * -2 + 2;
 		// default move speed
 
 	}
