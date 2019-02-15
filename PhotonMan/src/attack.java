@@ -9,7 +9,7 @@ public class attack extends object {
 		if (c.isGood)
 			dx = c.moveSpeed * 2 + 2;
 		else
-			dx = c.moveSpeed * -2 + 2;
+			dx = c.moveSpeed * -2 - 2;
 		// default move speed
 
 	}

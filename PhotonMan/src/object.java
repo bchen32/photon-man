@@ -19,8 +19,10 @@ public class object {
 	// movement speed
 	boolean visible;
 	// visibility
-	boolean stuckRight = false, stuckLeft = false, stuckUp = false;
-	// collision variables
+	boolean blockedSide = false;
+	boolean blockedUp = false;
+	boolean blockedDown = false;
+	// collision
 
 	public object(sprites sp, int x, int y, int w, int h) {
 
@@ -43,13 +45,15 @@ public class object {
 
 	public void move() {
 		int mx = dx - 2;
-		if (!stuckRight && mx > 0)
+		if (!blockedSide) {
 			x += mx;
-		else if (mx < 0 && !stuckLeft)
-			x += mx;
+		}
 
-		if (!stuckUp)
+		if (dy > 0 && !blockedDown) {
 			y += dy;
+		} else if (dy < 0 && !blockedUp) {
+			y += dy;
+		}
 		// moves self according to movement speed and collision variables
 	}
 

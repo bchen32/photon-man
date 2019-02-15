@@ -64,8 +64,10 @@ public class training {
 			}
 		}
 		// checks out of bounds
-		player.stuckRight = false;
 		character e;
+		player.blockedSide = false;
+		player.blockedUp = false;
+		player.blockedDown = false;
 		for (int x = 0; x != enemies.size(); x++) {
 
 			e = enemies.get(x);
@@ -74,29 +76,30 @@ public class training {
 				e.isDead = true;
 				e.currsp = e.mysp[4];
 			}
-
 			playerCollide(e);
 
 		}
-
 		// checks collision
 	}
 
 	public void playerCollide(object a) {
 		if (a instanceof character) {
 			character e = ((character) a);
-			if (!e.isDead)
-				if (!(player.y + player.h < e.y || player.y > e.y + e.h))
+			if (!e.isDead) {
+				if (!(player.y + player.h < e.y || player.y > e.y + e.h)) {
 					if (player.x + player.w >= e.x - player.dx && player.x + player.w <= e.x + player.dx) {
-						player.stuckRight = true;
-						player.x += e.dx;
+						player.blockedSide = true;
+						player.x += e.dx - 2;
 					}
-		} else {
-			if (!(player.y + player.h < a.y || player.y > a.y + a.h))
-				if (player.x + player.w >= a.x - player.dx && player.x + player.w <= a.x + player.dx) {
-					player.stuckRight = true;
-					player.x += a.dx;
 				}
+			}
+		} else {
+			if (!(player.y + player.h < a.y || player.y > a.y + a.h)) {
+				if (player.x + player.w >= a.x - player.dx && player.x + player.w <= a.x + player.dx) {
+					player.blockedSide = true;
+					player.x += a.dx - 2;
+				}
+			}
 		}
 	}
 }

@@ -189,11 +189,9 @@ public class character extends object {
 
 	public void walkAnimation(int xSpeed, int ySpeed, boolean isGood) {
 		if (isGood) {
-			if (xSpeed == 4) {
+			if (Math.abs(xSpeed) > 2) {
 				walkCount += 3;
-			}
-
-			if (xSpeed == 2 || ySpeed != 0) {
+			} else if (Math.abs(xSpeed) > 0 || ySpeed != 0) {
 				walkCount += 2;
 			}
 

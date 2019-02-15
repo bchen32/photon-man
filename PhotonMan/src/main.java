@@ -99,8 +99,7 @@ public class main extends JPanel implements ActionListener {
 				if (key == KeyEvent.VK_S) {
 					tr.player.down = true;
 				}
-			}
-			if (state.equals("training")) {
+			} else if (state.equals("training")) {
 				// if the game state is training.
 				if (key == KeyEvent.VK_W) {
 					tr.player.up = true;
@@ -115,7 +114,7 @@ public class main extends JPanel implements ActionListener {
 					tr.player.left = true;
 				}
 				if (key == KeyEvent.VK_E) {
-					
+
 					state = "loadout";
 				}
 			}
@@ -142,8 +141,7 @@ public class main extends JPanel implements ActionListener {
 				if (key == KeyEvent.VK_A) {
 					tr.player.left = false;
 				}
-			}
-			if (state.equals("training")) {
+			} else if (state.equals("training")) {
 				// if the game state is training...
 				if (key == KeyEvent.VK_SPACE)
 					tr.player.attack();
