@@ -166,8 +166,6 @@ public class character extends object {
 		if (isGood) {
 			if (x + dx > 480 - w)
 				dx = -2;
-			if (x + dx < 0)
-				dx = 2;
 			if (y + dy < 0)
 				dy = 2;
 			if (y + dy > 240 - h)
