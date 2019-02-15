@@ -90,13 +90,13 @@ public class character extends object {
 			mysp = sp.scientist;
 			health = 1;
 			isGood = false;
-			dx = -2;
+			dx = -1;
 		}
 		if (s.equals("soldier")) {
 			mysp = sp.soldier;
 			health = 2;
 			isGood = false;
-			dx = -2;
+			dx = -1;
 		}
 		updateStats();
 	}
@@ -153,27 +153,24 @@ public class character extends object {
 			}
 			if (left || right) {
 				if (left && right) {
-					dx = 0;
-				} else if (left) {
-					dx = -2;
-				} else if (right) {
 					dx = 2;
+				} else if (left) {
+					dx = 0;
+				} else if (right) {
+					dx = 4;
 				}
 			} else {
-				dx = 0;
+				dx = 2;
 			}
-		}
-		if (!isGood) {
-			dx = -2;
 		}
 		if (isGood) {
 			if (x + dx > 480 - w)
-				dx = 0;
+				dx = 2;
 			if (y + dy < 0 || y + dy > 240 - h)
-				dy = 0;
+				dy = 2;
 		}
 		if (isDead) {
-			x += dx;
+			x += -2;
 			// body keeps moving
 		} else {
 			walkAnimation(dx, dy, isGood);
@@ -189,24 +186,50 @@ public class character extends object {
 	}
 
 	public void walkAnimation(int xSpeed, int ySpeed, boolean isGood) {
-		if (Math.abs(xSpeed) == 2 || Math.abs(ySpeed) == 2) {
-			walkCount++;
-		}
+		if (isGood) {
+			if (xSpeed == 4) {
+				walkCount += 3;
+			}
 
-		if (xSpeed == 0 && ySpeed == 0) {
-			currsp = mysp[0];
+			if (xSpeed == 2 || ySpeed != 0) {
+				walkCount += 2;
+			}
+
+			if (xSpeed == 0 && ySpeed == 0) {
+				currsp = mysp[0];
+			} else {
+				if (walkCount <= 20)
+					currsp = mysp[1];
+				if (walkCount > 20)
+					currsp = mysp[2];
+				if (walkCount > 40)
+					currsp = mysp[3];
+				if (walkCount > 60)
+					currsp = mysp[2];
+				if (walkCount > 80) {
+					currsp = mysp[1];
+					walkCount = 0;
+				}
+			}
 		} else {
-			if (walkCount <= 10)
-				currsp = mysp[1];
-			if (walkCount > 10)
-				currsp = mysp[2];
-			if (walkCount > 20)
-				currsp = mysp[3];
-			if (walkCount > 30)
-				currsp = mysp[2];
-			if (walkCount > 40) {
-				currsp = mysp[1];
-				walkCount = 0;
+			if (Math.abs(xSpeed) == 1 || ySpeed != 0) {
+				walkCount++;
+			}
+			if (xSpeed == 0 && ySpeed == 0) {
+				currsp = mysp[0];
+			} else {
+				if (walkCount <= 20)
+					currsp = mysp[1];
+				if (walkCount > 20)
+					currsp = mysp[2];
+				if (walkCount > 40)
+					currsp = mysp[3];
+				if (walkCount > 60)
+					currsp = mysp[2];
+				if (walkCount > 80) {
+					currsp = mysp[1];
+					walkCount = 0;
+				}
 			}
 		}
 	}

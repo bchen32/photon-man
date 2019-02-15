@@ -42,10 +42,11 @@ public class object {
 	}
 
 	public void move() {
-		if (!stuckRight && dx > 0)
-			x += dx;
-		else if (dx < 0 && !stuckLeft)
-			x += dx;
+		int mx = dx - 2;
+		if (!stuckRight && mx > 0)
+			x += mx;
+		else if (mx < 0 && !stuckLeft)
+			x += mx;
 
 		if (!stuckUp)
 			y += dy;
