@@ -176,7 +176,7 @@ public class character extends object {
 			x += dx;
 			// body keeps moving
 		} else {
-			walkAnimation(dx, isGood);
+			walkAnimation(dx, dy, isGood);
 			// adjust walk animation
 			super.move();
 			// moves self
@@ -188,12 +188,12 @@ public class character extends object {
 		// moves attacks regardless of death
 	}
 
-	public void walkAnimation(int speed, boolean isGood) {
-		if (speed == 2 || speed == -2) {
+	public void walkAnimation(int xSpeed, int ySpeed, boolean isGood) {
+		if (Math.abs(xSpeed) == 2 || Math.abs(ySpeed) == 2) {
 			walkCount++;
 		}
 
-		if (speed == 0) {
+		if (xSpeed == 0 && ySpeed == 0) {
 			currsp = mysp[0];
 		} else {
 			if (walkCount <= 10)

@@ -25,7 +25,7 @@ public class sprites {
 	public sprites() {
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(this.getClass().getResourceAsStream("/images/photon man ss.png"));
+			img = ImageIO.read(this.getClass().getResourceAsStream("PhotonManSS.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
