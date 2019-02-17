@@ -35,7 +35,7 @@ public class character extends object {
 	boolean up, down, left, right = false;
 
 	public character(sprites sp, int x, int y, String loadout) {
-		super(sp, x, y, 40, 40);
+		super(sp, x, y, 30, 30);
 		// creates 40x40 object at the given location
 		setLoadOut(loadout);
 	}
