@@ -9,8 +9,6 @@ public class training {
 	ArrayList<character> enemies;
 	// enemy characters
 
-	// int attackCount = 0;
-
 	public training(sprites sp) {
 		player = new character(sp, 20, 140, "red");
 		// creates new player at 20, 200
@@ -42,13 +40,7 @@ public class training {
 	public void move() {
 		player.move();
 		// moves player
-		// attackCount++;
 		for (character e : enemies) {
-			// if (attackCount == 20) {
-			// // attacks every 20 frames
-			// attackCount = 0;
-			// e.attack();
-			// }
 			e.move();
 		}
 		// moves enemies
@@ -76,30 +68,9 @@ public class training {
 				e.isDead = true;
 				e.currsp = e.mysp[4];
 			}
-			playerCollide(e);
+			player.collide(e);
 
 		}
 		// checks collision
-	}
-
-	public void playerCollide(object a) {
-		if (a instanceof character) {
-			character e = ((character) a);
-			if (!e.isDead) {
-				if (!(player.y + player.h < e.y || player.y > e.y + e.h)) {
-					if (player.x + player.w >= e.x - player.dx && player.x + player.w <= e.x + player.dx) {
-						player.blockedSide = true;
-						player.x += e.dx - 2;
-					}
-				}
-			}
-		} else {
-			if (!(player.y + player.h < a.y || player.y > a.y + a.h)) {
-				if (player.x + player.w >= a.x - player.dx && player.x + player.w <= a.x + player.dx) {
-					player.blockedSide = true;
-					player.x += a.dx - 2;
-				}
-			}
-		}
 	}
 }

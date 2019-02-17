@@ -172,6 +172,7 @@ public class character extends object {
 				dy = -2;
 		}
 		if (isDead) {
+			collideable = false;
 			x += -2;
 			// body keeps moving
 		} else {
@@ -284,6 +285,24 @@ public class character extends object {
 		if (energy <= 0) {
 			energy = 0;
 			health = 1;
+		}
+	}
+	
+	public void collide(object e) {
+		if (e.collideable) { 
+			if (!(this.y + this.h < e.y || this.y > e.y + e.h)) {
+				if (this.x + this.w + this.dx >= e.x && this.x <= e.x) {
+					this.blockedSide = true;
+					this.x += e.dx - 2;
+				}
+			}
+			if (!(this.x + this.w < e.x || this.x > e.x + e.w)) {
+				if (this.y >= e.y + e.h && this.y + this.dy <= e.y + e.h) {
+					this.blockedUp = true;
+				} else if (this.y + this.h <= e.y && this.y + this.h + this.dy >= e.y) {
+					this.blockedDown = true;
+				}
+			}
 		}
 	}
 }

@@ -22,6 +22,7 @@ public class object {
 	boolean blockedSide = false;
 	boolean blockedUp = false;
 	boolean blockedDown = false;
+	boolean collideable = true;
 	// collision
 
 	public object(sprites sp, int x, int y, int w, int h) {
