@@ -35,8 +35,8 @@ public class character extends object {
 	boolean up, down, left, right = false;
 
 	public character(sprites sp, int x, int y, String loadout) {
-		super(sp, x, y, 30, 30);
-		// creates 40x40 object at the given location
+		super(sp, x, y, 36, 36);
+		// creates 36x36 object at the given location
 		setLoadOut(loadout);
 	}
 
@@ -287,9 +287,9 @@ public class character extends object {
 			health = 1;
 		}
 	}
-	
+
 	public void collide(object e) {
-		if (e.collideable) { 
+		if (e.collideable) {
 			if (!(this.y + this.h < e.y || this.y > e.y + e.h)) {
 				if (this.x + this.w + this.dx >= e.x && this.x <= e.x) {
 					this.blockedSide = true;
