@@ -8,16 +8,22 @@ public class training {
 	// player character
 	ArrayList<character> enemies;
 	// enemy characters
+	ArrayList<crate> crates;
+	// crates
 
 	public training(sprites sp) {
 		player = new character(sp, 20, 140, "red");
 		// creates new player at 20, 200
 		enemies = new ArrayList<character>();
+		crates = new ArrayList<crate>();
 		for (int x = 0; x != 20; x++) {
 			character e = new character(sp, 600 + x * 300, 140, "scientist");
 			enemies.add(e);
 		}
+		
 		// creates and instantiates enemies
+		crates.add(new crate(sp, 400, 140));
+		// test crate
 	}
 
 	public void draw(Graphics g) {
@@ -25,6 +31,10 @@ public class training {
 		// draws player
 		for (character e : enemies) {
 			e.draw(g);
+		}
+		// draw crates
+		for (crate c : crates) {
+			c.draw(g);
 		}
 		// draws enemies
 		drawOverlay(g);
@@ -44,6 +54,10 @@ public class training {
 			e.move();
 		}
 		// moves enemies
+		for (crate c : crates) {
+			c.move();
+		}
+		// moves crates
 		check();
 		// checks collision and out of bounds
 	}
@@ -57,6 +71,7 @@ public class training {
 		}
 		// checks out of bounds
 		character e;
+		crate c;
 		player.blockedSide = false;
 		player.blockedUp = false;
 		player.blockedDown = false;
@@ -69,7 +84,10 @@ public class training {
 				e.currsp = e.mysp[4];
 			}
 			player.collide(e);
-
+		}
+		for (int x = 0; x != crates.size(); x++) {
+			c = crates.get(x);
+			player.collide(c);
 		}
 		// checks collision
 	}
