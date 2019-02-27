@@ -114,7 +114,6 @@ public class main extends JPanel implements ActionListener {
 					tr.player.left = true;
 				}
 				if (key == KeyEvent.VK_E) {
-
 					state = "loadout";
 				}
 			}

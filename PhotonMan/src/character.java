@@ -139,30 +139,30 @@ public class character extends object {
 
 	@Override
 	public void move() {
-		if (isGood) {
-			if (up || down) {
-				if (up && down) {
+			if (isGood) {
+				if (up || down) {
+					if (up && down) {
+						dy = 0;
+					} else if (up) {
+						dy = -moveSpeed;
+					} else if (down) {
+						dy = moveSpeed;
+					}
+				} else {
 					dy = 0;
-				} else if (up) {
-					dy = -2;
-				} else if (down) {
-					dy = 2;
 				}
-			} else {
-				dy = 0;
-			}
-			if (left || right) {
-				if (left && right) {
+				if (left || right) {
+					if (left && right) {
+						dx = 2;
+					} else if (left) {
+						dx = 0;
+					} else if (right) {
+						dx = 2 + moveSpeed;
+					}
+				} else {
 					dx = 2;
-				} else if (left) {
-					dx = 0;
-				} else if (right) {
-					dx = 4;
 				}
-			} else {
-				dx = 2;
 			}
-		}
 		if (isGood) {
 			if (x + dx > 480 - w)
 				dx = -2;
