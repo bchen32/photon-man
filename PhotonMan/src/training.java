@@ -25,7 +25,7 @@ public class training {
 		}
 		// creates and instantiates enemies
 		crates.add(new crate(sp, 400, 140));
-		lasers.add(new laser(sp, 500, 176));
+		lasers.add(new laser(sp, 500, 100));
 		// test laser
 		// test crate
 	}
