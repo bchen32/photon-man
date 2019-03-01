@@ -35,7 +35,7 @@ public class character extends object {
 	boolean up, down, left, right = false;
 
 	public character(sprites sp, int x, int y, String loadout) {
-		super(sp, x, y, 36, 36);
+		super(sp, x, y, 38, 38);
 		// creates 36x36 object at the given location
 		setLoadOut(loadout);
 	}
@@ -139,30 +139,30 @@ public class character extends object {
 
 	@Override
 	public void move() {
-			if (isGood) {
-				if (up || down) {
-					if (up && down) {
-						dy = 0;
-					} else if (up) {
-						dy = -moveSpeed;
-					} else if (down) {
-						dy = moveSpeed;
-					}
-				} else {
+		if (isGood) {
+			if (up || down) {
+				if (up && down) {
 					dy = 0;
+				} else if (up) {
+					dy = -moveSpeed;
+				} else if (down) {
+					dy = moveSpeed;
 				}
-				if (left || right) {
-					if (left && right) {
-						dx = 2;
-					} else if (left) {
-						dx = 0;
-					} else if (right) {
-						dx = 2 + moveSpeed;
-					}
-				} else {
-					dx = 2;
-				}
+			} else {
+				dy = 0;
 			}
+			if (left || right) {
+				if (left && right) {
+					dx = 2;
+				} else if (left) {
+					dx = 0;
+				} else if (right) {
+					dx = 2 + moveSpeed;
+				}
+			} else {
+				dx = 2;
+			}
+		}
 		if (isGood) {
 			if (x + dx > 480 - w)
 				dx = -2;
@@ -290,7 +290,7 @@ public class character extends object {
 
 	public void collide(object e) {
 		if (e.collideable) {
-			if (!(this.y + this.h < e.y || this.y > e.y + e.h)) {
+			if (!(this.y + this.h < e.y + 1 || this.y > e.y + e.h - 1)) {
 				if (this.x + this.w + this.dx >= e.x && this.x <= e.x) {
 					this.blockedSide = true;
 					this.x += e.dx - 2;

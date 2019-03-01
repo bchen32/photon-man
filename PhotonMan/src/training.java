@@ -10,19 +10,23 @@ public class training {
 	// enemy characters
 	ArrayList<crate> crates;
 	// crates
+	ArrayList<laser> lasers;
+	// lasers
 
 	public training(sprites sp) {
 		player = new character(sp, 20, 140, "red");
 		// creates new player at 20, 200
 		enemies = new ArrayList<character>();
 		crates = new ArrayList<crate>();
+		lasers = new ArrayList<laser>();
 		for (int x = 0; x != 20; x++) {
 			character e = new character(sp, 600 + x * 300, 140, "scientist");
 			enemies.add(e);
 		}
-		
 		// creates and instantiates enemies
 		crates.add(new crate(sp, 400, 140));
+		lasers.add(new laser(sp, 500, 176));
+		// test laser
 		// test crate
 	}
 
@@ -36,6 +40,11 @@ public class training {
 		for (crate c : crates) {
 			c.draw(g);
 		}
+		for (laser l : lasers) {
+			l.crateA.draw(g);
+			l.crateB.draw(g);
+			l.b.draw(g);
+		}
 		// draws enemies
 		drawOverlay(g);
 	}
@@ -48,6 +57,8 @@ public class training {
 	}
 
 	public void move() {
+		check();
+		// checks collision and out of bounds
 		player.move();
 		// moves player
 		for (character e : enemies) {
@@ -58,8 +69,12 @@ public class training {
 			c.move();
 		}
 		// moves crates
-		check();
-		// checks collision and out of bounds
+		for (laser l : lasers) {
+			l.crateA.move();
+			l.crateB.move();
+			l.b.move();
+		}
+		// moves lasers
 	}
 
 	public void check() {
@@ -71,7 +86,6 @@ public class training {
 		}
 		// checks out of bounds
 		character e;
-		crate c;
 		player.blockedSide = false;
 		player.blockedUp = false;
 		player.blockedDown = false;
@@ -85,9 +99,12 @@ public class training {
 			}
 			player.collide(e);
 		}
-		for (int x = 0; x != crates.size(); x++) {
-			c = crates.get(x);
+		for (crate c : crates) {
 			player.collide(c);
+		}
+		for (laser l : lasers) {
+			player.collide(l.crateA);
+			player.collide(l.crateB);
 		}
 		// checks collision
 	}
