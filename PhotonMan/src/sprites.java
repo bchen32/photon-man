@@ -19,8 +19,8 @@ public class sprites {
 	BufferedImage[] smallobj = new BufferedImage[5];
 	// 0 red 1 blue 2 green 3 purple 4 orange 5 black
 	BufferedImage[] icons = new BufferedImage[6];
-	// 0 metal box 1 wood box 2 laser
-	BufferedImage[] largeobj = new BufferedImage[3];
+	// 0 metal box 1 wood box 2 laser 3 double laser
+	BufferedImage[] largeobj = new BufferedImage[4];
 
 	public sprites() {
 		BufferedImage img = null;
@@ -47,6 +47,7 @@ public class sprites {
 		largeobj[0] = img.getSubimage(120, 320, 40, 40);
 		largeobj[1] = img.getSubimage(160, 320, 40, 40);
 		largeobj[2] = img.getSubimage(100, 320, 20, 20);
+		largeobj[3] = img.getSubimage(0, 360, 20, 40);
 		// chops up the sprite sheet into individual sprites then organizes them
 	}
 

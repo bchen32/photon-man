@@ -1,9 +1,9 @@
 
 public class beam extends object {
 	public beam(sprites sp, int x, int y) {
-		super(sp, x, y, 18, 18);
+		super(sp, x, y, 20, 40);
 		// TODO Auto-generated constructor stub
-		currsp = sp.largeobj[2];
+		currsp = sp.largeobj[3];
 	}
 
 	@Override

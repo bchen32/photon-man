@@ -3,7 +3,7 @@ public class crate extends object {
 	int type;
 
 	public crate(sprites sp, int x, int y) {
-		super(sp, x, y, 36, 36);
+		super(sp, x, y, 40, 40);
 		// TODO Auto-generated constructor stub
 		type = (int) (Math.random() * 2);
 		currsp = sp.largeobj[type];
