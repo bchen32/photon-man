@@ -1,10 +1,12 @@
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 public class sprites {
-
+	
 	// 0 rest 1-3 run cycle 4 death
 	BufferedImage[] red = new BufferedImage[5];
 	BufferedImage[] blue = new BufferedImage[5];
@@ -14,14 +16,14 @@ public class sprites {
 	BufferedImage[] black = new BufferedImage[5];
 	BufferedImage[] scientist = new BufferedImage[5];
 	BufferedImage[] soldier = new BufferedImage[5];
-
+	
 	// 0 bullet 1 slice 2 beam 3 yellow orb 4 purple orb
 	BufferedImage[] smallobj = new BufferedImage[5];
 	// 0 red 1 blue 2 green 3 purple 4 orange 5 black
 	BufferedImage[] icons = new BufferedImage[6];
 	// 0 metal box 1 wood box 2 laser 3 double laser
 	BufferedImage[] largeobj = new BufferedImage[4];
-
+	
 	public sprites() {
 		BufferedImage img = null;
 		try {
@@ -30,7 +32,7 @@ public class sprites {
 			e.printStackTrace();
 		}
 		// temp image is linked to the sprite sheet
-
+		
 		for (int x = 0; x != 5; x++) {
 			red[x] = img.getSubimage(40 * x, 0, 40, 40);
 			blue[x] = img.getSubimage(40 * x, 40, 40, 40);
@@ -47,8 +49,17 @@ public class sprites {
 		largeobj[0] = img.getSubimage(120, 320, 40, 40);
 		largeobj[1] = img.getSubimage(160, 320, 40, 40);
 		largeobj[2] = img.getSubimage(100, 320, 20, 20);
-		largeobj[3] = img.getSubimage(0, 360, 20, 40);
+		BufferedImage horizLaser = img.getSubimage(0, 360, 60, 20);
+		AffineTransform at = new AffineTransform();
+		at.rotate(Math.PI / 2, 30, 30);
+		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		horizLaser = op.filter(horizLaser, null);
+		at = new AffineTransform();
+		at.translate(-40, 0);
+		op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		largeobj[3] = op.filter(horizLaser, null);
+		// laser needs to be rotated and translated
 		// chops up the sprite sheet into individual sprites then organizes them
 	}
-
+	
 }
